@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大切な人の月経時の状態を知っていますか？</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body @vue:mounted="init">
+    <div v-if="mode == 'top'">
+      <h1>大切な人の月経時の状態を知っていますか？</h1>
+      <p>
+        このアプリの目的は、女性の月経時の状態を診断して有益な情報へのリンクを提供するとともに、身近な男性に大切な人（女性）の月経症状の程度を知ってもらうことです。
+      </p>
+      <p>
+        まず女性がアンケートに回答し、そのあと、<span class="marker">同じブラウザーを使って</span
+        >男性がクイズに答えてください。女性が回答したあと、タブやブラウザーを一旦閉じてしまっても構いません。
+      </p>
+      <p>あなたは女性ですか？ 男性ですか？</p>
+      <button @click="mode = 'quiz'">女性です</button>
+      <button @click="beginQuiz">男性です</button>
+      <p class="nodata" v-if="noData">
+        女性がまだ回答していない、あるいは、女性が回答したブラウザーと同じブラウザーではないようです。ブラウザーの種類だけでなく、スマホやPCも同じでなくてはなりません。
+      </p>
+    </div>
+
+    <div v-else-if="mode == 'quiz'">
+      <template v-if="isFemale">
+        <h1 class="female">
+          あなたの月経時の状態診断アンケート<br />
+          <span>for Female</span>
+        </h1>
+        <p>あなた自身の症状や状態について、相手からどのように見えていると思うか回答してください。</p>
+      </template>
+      <template v-else>
+        <h1 class="male">
+          大切な人の月経時の状態推定クイズ<br />
+          <span>for Male</span>
+        </h1>
+        <p>このクイズに回答するよう依頼された女性について、当てはまると思うものを選んでください。</p>
+      </template>
+      <div id="quiz_section" v-if="onQuiz">
+        <form>
+          <div class="question" v-for="(q, i) of quizList">
+            <p>第{{i+1}}問：{{q.statement}}</p>
+            <div class="options" v-for="(opt, j) of q.options">
+              <label><input type="radio" v-model="answers[fm][i]" :value="j" />{{opt}}</label><br />
+            </div>
+          </div>
+
+          <button v-if="isFemale" @click.prevent="recordAnswers">回答を記録する</button>
+          <button v-else @click.prevent="showResult">結果を表示する</button>
+          <span class="warning" v-if="fewAnswers">回答されていない項目があります</span><br />
+          <small v-if="isFemale">※データはいま開いているブラウザーにしか記録されません</small>
+        </form>
+      </div>
+    </div>
+
+    <div id="resule_section" v-else>
+      <h1>結果</h1>
+      <div id="resultMessage">
+        {{judgmentList[judgedNum].statement}}
+        <div id="recommendInfo">
+          あなたとパートナーにおすすめのウェブ情報はこちら
+          <ul>
+            <li v-for="link of judgmentList[judgedNum].links"><a :href="link.url">{{link.title}}</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="result">ふたりの一致度は<span>【{{coinDeg}}％】</span>でした。</div>
+
+      <div class="question" v-for="(q, i) of quizList">
+        <p>第{{i+1}}問：{{q.statement}}</p>
+        <ul>
+          <li class="options" :style="addColor(i, j)" v-for="(opt, j) of q.options">{{opt}}</li>
+        </ul>
+      </div>
+
+      <button id="deleteData" @click="deleteData">回答データを削除する</button>
+    </div>
+    <script src="https://unpkg.com/petite-vue"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
