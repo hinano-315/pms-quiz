@@ -1,0 +1,84 @@
+.marker {
+  background: linear-gradient(transparent 50%, #ffff7f 50%);
+}
+
+#resultMessage {
+  font-size: 1.5rem;
+  border: solid gold 0.5rem;
+  padding: 0.5rem;
+}
+
+#recommendInfo {
+  font-size: 1rem;
+}
+
+.result {
+  border: solid plum 0.5em;
+  padding: 1rem;
+  margin-top: 2em;
+}
+
+.result span {
+  color: firebrick;
+  font-weight: bold;
+}
+
+h1 {
+  background-color: plum;
+  line-height: 1;
+  color: white;
+  padding: 1rem;
+}
+
+h1.female {
+  background-color: palevioletred;
+}
+
+h1.male {
+  background-color: cornflowerblue;
+}
+
+h1 span {
+  font-size: 1rem;
+}
+
+button {
+  font-size: 1.2em;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border-style: none;
+  border-radius: 1em;
+  color: white;
+}
+
+div button:first-of-type {
+  background-color: palevioletred;
+}
+
+div button:last-of-type {
+  background-color: cornflowerblue;
+}
+
+form button:last-of-type {
+  margin-top: 2rem;
+  background-color: plum;
+}
+
+button#deleteData {
+  margin-top: 2rem;
+  background-color: plum;
+  font-size: 1rem;
+}
+
+small {
+  color: plum;
+}
+
+.warning {
+  color: firebrick;
+}
+
+.nodata {
+  border: solid gold 0.5em;
+  padding: 1rem;
+}
