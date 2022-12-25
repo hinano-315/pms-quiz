@@ -1,3 +1,5 @@
+/* デザインは自力でがんばってね */
+
 .marker {
   background: linear-gradient(transparent 50%, #ffff7f 50%);
 }
@@ -82,3 +84,15 @@ small {
   border: solid gold 0.5em;
   padding: 1rem;
 }
+
+.p-color{
+  color:orangered;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  border: solid 3px orangered;
+  border-radius: 10px;
+  width:60%;
+  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+}
+
