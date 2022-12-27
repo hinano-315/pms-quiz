@@ -96,3 +96,6 @@ small {
   margin-top: 0.5rem;
 }
 
+.question p{
+  background-color: beige;
+}
